@@ -32,7 +32,7 @@ function deepMerge(base, override) {
   const result = { ...base };
   for (const key of Object.keys(override)) {
     if (key in result && typeof result[key] === 'object' && typeof override[key] === 'object'
-        && !Array.isArray(result[key]) && !Array.isArray(override[key])) {
+      && !Array.isArray(result[key]) && !Array.isArray(override[key])) {
       result[key] = deepMerge(result[key], override[key]);
     } else {
       result[key] = override[key];
@@ -138,7 +138,7 @@ function parseYamlArray(lines, start, end, parentIndent) {
       if (kvMatch) {
         const obj = {};
         obj[kvMatch[1]] = kvMatch[2].trim() === '>'
-          ? (() => { let v=''; i++; while(i<end){const l=lines[i];if(l.trim()===''||/^\s*#/.test(l)){i++;continue;}if(l.search(/\S/)<=indent+2)break;v+=(v?' ':'')+l.trim();i++;} return v; })()
+          ? (() => { let v = ''; i++; while (i < end) { const l = lines[i]; if (l.trim() === '' || /^\s*#/.test(l)) { i++; continue; } if (l.search(/\S/) <= indent + 2) break; v += (v ? ' ' : '') + l.trim(); i++; } return v; })()
           : unquote(kvMatch[2]);
 
         if (kvMatch[2].trim() !== '>') i++;
@@ -152,8 +152,8 @@ function parseYamlArray(lines, start, end, parentIndent) {
           const nkv = nl.trim().match(/^([\w]+):\s*(.*)/);
           if (nkv) {
             if (nkv[2].trim() === '>') {
-              let v=''; i++;
-              while(i<end){const l=lines[i];if(l.trim()===''||/^\s*#/.test(l)){i++;continue;}if(l.search(/\S/)<=ni)break;v+=(v?' ':'')+l.trim();i++;}
+              let v = ''; i++;
+              while (i < end) { const l = lines[i]; if (l.trim() === '' || /^\s*#/.test(l)) { i++; continue; } if (l.search(/\S/) <= ni) break; v += (v ? ' ' : '') + l.trim(); i++; }
               obj[nkv[1]] = v;
             } else {
               obj[nkv[1]] = unquote(nkv[2]);
@@ -213,7 +213,7 @@ function socialLink(platform, url) {
 
 function esc(s) {
   if (typeof s !== 'string') return '';
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 function raw(s) { return typeof s === 'string' ? s : ''; }
@@ -649,7 +649,7 @@ function buildTocItems(sections) {
     </li>\n`;
 
   for (const sec of sections) {
-    const navLabel = sec.label.replace(/[：:].*/,'').trim();
+    const navLabel = sec.label.replace(/[：:].*/, '').trim();
     const numDisplay = sec.label === '總結' ? '★' : sec.num;
     html += `    <li class="toc-group" data-section="${sec.id}">
       <a href="#${sec.id}" class="toc-group-title">
@@ -940,7 +940,7 @@ function buildContentSections(sections) {
     html += `\n<hr class="divider">
 <section class="section">
   <div class="reveal">
-    <span class="section-label" id="${sec.id}"><span class="num">${sec.label === '總結' ? '★' : sec.num}</span> ${esc(sec.label.replace(/[：:].*/,'').trim())}</span>
+    <span class="section-label" id="${sec.id}"><span class="num">${sec.label === '總結' ? '★' : sec.num}</span> ${esc(sec.label.replace(/[：:].*/, '').trim())}</span>
     <h2>${esc(sec.h2)}</h2>
     ${sec.lead ? `<p class="lead">${inlineFormatWithBreaks(sec.lead)}</p>` : ''}
   </div>\n`;
@@ -1072,9 +1072,9 @@ function build(courseDir) {
   const navSource = cfg.nav && cfg.nav.length
     ? cfg.nav
     : sections.map(sec => ({
-        text: sec.label.replace(/[：:].*/,'').trim(),
-        href: `#${sec.id}`,
-      }));
+      text: sec.label.replace(/[：:].*/, '').trim(),
+      href: `#${sec.id}`,
+    }));
   const navItems = navSource.map((n, i) =>
     `<a href="${esc(n.href)}">${esc(n.text)}</a>`
   ).join('\n    ');
@@ -1106,6 +1106,7 @@ function build(courseDir) {
     '{{PAGE_LANG}}': cfg.page?.lang || 'zh-TW',
     '{{PAGE_MODE}}': cfg.page?.mode ? `data-mode="${cfg.page.mode}"` : '',
     '{{PAGE_TITLE}}': cfg.page?.title || '',
+    '{{FAVICON}}': cfg.page?.favicon || '',
     '{{OG_TYPE}}': esc(og.type),
     '{{OG_TITLE}}': esc(og.title),
     '{{OG_DESCRIPTION}}': esc(og.description),
