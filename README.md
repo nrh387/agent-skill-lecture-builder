@@ -5,40 +5,52 @@ Markdown 講稿 → 單一 HTML 課程頁面。零依賴 Node.js 建置。
 ## Quick Start
 
 ```bash
-# 建置 cake 課程
-node build.mjs cake
+# 建立課程目錄
+mkdir -p example/assets
 
-# 瀏覽器開啟
-open cake/index.html
+# 準備內容與設定
+$EDITOR example/content.md
+$EDITOR example/config.yaml
 
-# 產出 OG 縮圖（square hero-only）
-node generate-og.mjs cake
+# 單純啟動本機預覽（會先 build，之後自動重建）
+node .agents/skills/course-page-generator/scripts/dev.mjs example
+
+# 或使用 package script
+npm run dev -- example
 ```
 
 ## 專案結構
 
 ```
-course/
+agent-skill-lecture-builder/
+├── .agents/
+│   └── skills/
+│       └── course-page-generator/
+│           ├── scripts/
+│           │   ├── build.mjs        # 建置課程頁
+│           │   ├── dev.mjs          # 本機預覽
+│           │   └── generate-og.mjs  # 產出 1200x630 OG 圖
+│           └── reference/
+│               ├── base.html
+│               ├── components.md
+│               └── config-example.yaml
 ├── config/
 │   ├── global.yaml          # 全域設定（講者、社群、頁尾）
 │   └── assets/              # 共用圖片（avatar 等）
-├── build.mjs                # 課程頁 build script
-├── generate-og.mjs          # 針對課程頁截 1200x1200 OG 圖
-├── cake/                    # ← 課程目錄（可新增更多）
+├── example/                 # 課程目錄示意（建立後會包含下列檔案）
 │   ├── config.yaml          # 課程專屬設定（覆蓋 global）
 │   ├── content.md           # 結構化 Markdown 講稿
-│   ├── index.html           # 產出（課程頁）
+│   ├── index.html           # build 產出
 │   └── assets/
-│       └── og-cake.jpg      # OG 縮圖（generate-og.mjs 產出）
-└── .cursor/skills/
-    └── course-page-generator/
-        └── reference/       # HTML 模板、格式範例
+│       └── og-*.jpg         # generate-og.mjs 產出
+├── package.json
+└── README.md
 ```
 
 ## 新增一門課程
 
 ```bash
-mkdir my-course
+mkdir -p my-course/assets
 ```
 
 1. **建立 `my-course/content.md`** — 用約定的 Markdown 語法撰寫講稿（或丟原始筆記給 AI，觸發 Skill 自動轉換）
@@ -46,10 +58,41 @@ mkdir my-course
 3. **Build**
 
 ```bash
-node build.mjs my-course
+node .agents/skills/course-page-generator/scripts/build.mjs my-course
 ```
 
 產出 `my-course/index.html`。
+
+若只想單純啟動本機預覽：
+
+```bash
+node .agents/skills/course-page-generator/scripts/dev.mjs my-course
+```
+
+也可以指定 port：
+
+```bash
+node .agents/skills/course-page-generator/scripts/dev.mjs my-course --port 8080
+```
+
+`dev.mjs` 會：
+
+- 啟動本機伺服器
+- 先自動執行一次 build
+- 監看 `content.md`、`config.yaml`、`config/global.yaml`、`reference/base.html`
+- 存檔後自動重建並重新整理瀏覽器
+
+若只想產出靜態檔，不需要啟動 server：
+
+```bash
+node .agents/skills/course-page-generator/scripts/build.mjs my-course
+```
+
+若要產出 OG 縮圖：
+
+```bash
+node .agents/skills/course-page-generator/scripts/generate-og.mjs my-course
+```
 
 ## Config 機制
 
@@ -63,6 +106,47 @@ node build.mjs my-course
 課程 config 只需寫要覆蓋的欄位，其餘繼承全域。陣列欄位（如 `socials`）會整個取代。
 
 `nav`（Hero 導覽按鈕）預設從 `content.md` 的 `#` 章節自動產生，不需在 config 維護。
+
+`config/global.yaml` 不必放在固定位置。Build 會從課程目錄往上搜尋最多 4 層父目錄，找到第一個 `config/global.yaml` 就使用。
+
+### Global config 範例
+
+```yaml
+page:
+  lang: zh-TW
+
+instructor:
+  name: "講者名稱"
+  tagline: "一句話介紹"
+  bio: >
+    這裡可放講者簡介。<br>
+    支援 HTML `<br>` 換行。
+  avatar: "config/assets/author"  # 可省略副檔名
+  stats:
+    - text: "📚 代表作品或經歷 **X** 項"
+      url: "https://example.com/books"
+  socials:
+    - platform: "YouTube"
+      url: "https://youtube.com/@your-channel"
+
+quotes:
+  opening:
+    text: "課程開場金句"
+  closing:
+    text: >
+      課程結尾金句
+
+footer:
+  cta: "頁尾行動呼籲"
+  copyright: "© 你的名字"
+  show_socials: true
+
+seo:
+  title: "預設 SEO 標題"
+  description: "預設 SEO 描述"
+  image: "https://your-domain.example/course/example/assets/og-image.jpg"
+  url: "https://your-domain.example/course/example/"
+```
 
 ### 課程 config 範例
 
@@ -87,6 +171,8 @@ quotes:
 #     href: "#section-id"
 ```
 
+如果你需要完整欄位，請直接參考 [`config-example.yaml`](./.agents/skills/course-page-generator/reference/config-example.yaml)。
+
 ## Markdown 語法
 
 | 語法 | 用途 |
@@ -98,7 +184,7 @@ quotes:
 | `` ```prompt [label="..."] `` | 終端機 / Prompt 區塊 |
 | `> **Bold Title**` | 洞察框 |
 | `[flow]...[/flow]` | 流程步驟 |
-| `[tags]...[/tags]` | 標籤（green / orange / purple / blue，必須用此區塊包裹） |
+| `[tags]...[/tags]` | 標籤（`green / orange / purple / blue`，必須用此區塊包裹） |
 | `[summary]...[/summary]` | 總結卡片 |
 | `[bonus title="..."]...[/bonus]` | Bonus 按鈕 + 彈窗 |
 | `- [x] item` | 勾選清單（僅用於已驗證/已完成的事項，不適合一般觀點條列） |
@@ -107,7 +193,7 @@ quotes:
 | `[youtube id="..." title="..."]` | YouTube 影片嵌入（16:9 響應式） |
 | `---` | 章節分隔線 |
 
-詳細語法與 HTML 對照見 `.cursor/skills/course-page-generator/reference/components.md`。
+詳細語法與 HTML 對照見 [`components.md`](./.agents/skills/course-page-generator/reference/components.md)。
 
 ### 圖片
 
@@ -183,4 +269,4 @@ AI 會自動觸發 `course-page-generator` Skill：
 
 1. 將原始筆記轉換為約定的 Markdown 格式 → `content.md`
 2. 建立或確認 `config.yaml`
-3. 執行 `node build.mjs <dir>` → 產出 `index.html`
+3. 執行 `node .agents/skills/course-page-generator/scripts/build.mjs <dir>` → 產出 `index.html`

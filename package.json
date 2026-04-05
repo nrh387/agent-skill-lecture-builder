@@ -5,25 +5,25 @@
   "main": "index.js",
   "scripts": {
     "build": "node .agents/skills/course-page-generator/scripts/build.mjs",
-    "build:course": "node .agents/skills/course-page-generator/scripts/build.mjs course",
+    "build:example": "node .agents/skills/course-page-generator/scripts/build.mjs example",
     "dev": "node .agents/skills/course-page-generator/scripts/dev.mjs",
-    "dev:course": "node .agents/skills/course-page-generator/scripts/dev.mjs course",
+    "dev:example": "node .agents/skills/course-page-generator/scripts/dev.mjs example",
     "og": "node .agents/skills/course-page-generator/scripts/generate-og.mjs",
-    "og:course": "node .agents/skills/course-page-generator/scripts/generate-og.mjs course",
+    "og:example": "node .agents/skills/course-page-generator/scripts/generate-og.mjs example",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dean9703111/course.git"
+    "url": "git@github.com:deancourse/agent-skill-lecture-builder.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/dean9703111/course/issues"
+    "url": "https://github.com/deancourse/agent-skill-lecture-builder/issues"
   },
-  "homepage": "https://github.com/dean9703111/course#readme",
+  "homepage": "https://github.com/deancourse/agent-skill-lecture-builder#readme",
   "devDependencies": {
     "puppeteer": "^24.39.1"
   }
