@@ -1,6 +1,6 @@
 # Course Page Generator
 
-Markdown 講稿 → 單一 HTML 課程頁面。零依賴 Node.js 建置。
+提供主題 or Markdown 講稿，透過 Agent Skills 單一 HTML 課程頁面。
 
 ## Quick Start
 
