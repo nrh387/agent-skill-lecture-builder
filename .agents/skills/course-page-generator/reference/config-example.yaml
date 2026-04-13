@@ -1,43 +1,43 @@
 # ===================================================
-# Course Page Generator — YAML Config 完整範例
-# 可作為 global.yaml 或課程 config.yaml 的參考
-# 課程 config 只需寫要覆蓋的欄位（deep merge）
+# Course Page Generator — YAML Config 完整示例
+# 可作为 global.yaml 或课程 config.yaml 的参考
+# 课程 config 只需写要覆盖的字段（deep merge）
 # ===================================================
 
 # ---------------------------------------------------
-# 頁面基本設定
+# 页面基础设置
 # ---------------------------------------------------
 page:
-  lang: zh-TW
+  lang: zh-CN
   favicon: "https://deanlin.net/images/favicon.png"
-  title: "課程標題示意 — 從主題介紹到實作應用"
-  badge: "課程分類示意 · 主題標籤示意"
-  # hero_title 支援 <br> 換行
-  hero_title: "從核心概念理解<br>到實際案例應用"
-  subtitle: "這裡可放課程副標示意，簡要說明學習重點、適合對象與完成後可獲得的能力。"
+  title: "课程标题示意 — 从主题介绍到实作应用"
+  badge: "课程分类示意 · 主题标签示意"
+  # hero_title 支持 <br> 换行
+  hero_title: "从核心概念理解<br>到实际案例应用"
+  subtitle: "这里可放课程副标题示意，简要说明学习重点、适合对象与完成后可获得的能力。"
 
 # ---------------------------------------------------
-# 講者資訊
+# 讲师信息
 # ---------------------------------------------------
 instructor:
-  name: "示意講師名稱 Example Instructor"
-  tagline: "講師職稱示意 · 專長領域示意 · 教學特色示意"
+  name: "示意讲师名称 Example Instructor"
+  tagline: "讲师职称示意 · 专长领域示意 · 教学特色示意"
   bio: >
-    這裡可放講師簡介示意文字，用來介紹背景、實務經驗與授課風格。<br>
-    建議聚焦在學員最關心的價值，例如能學到什麼、適合誰，以及為何值得向這位講師學習。
-  # avatar 留空則使用 placeholder（👤 圖示）
-  # 可省略副檔名，build 會自動偵測 jpg/jpeg/png/webp/gif/svg
-  # 路徑相對於 config/ 的父目錄（即 global.yaml 所在的 config/ 之上一層）
+    这里可放讲师简介示意文字，用来介绍背景、实务经验与授课风格。<br>
+    建议聚焦在学员最关心的价值，例如能学到什么、适合谁，以及为何值得向这位讲师学习。
+  # avatar 留空则使用 placeholder（👤 图示）
+  # 可省略扩展名，build 会自动检测 jpg/jpeg/png/webp/gif/svg
+  # 路径相对于 config/ 的父目录（即 global.yaml 所在的 config/ 之上一层）
   avatar: "config/assets/author"
-  # stats：text 支援 **粗體** 等 inline markdown
+  # stats：text 支持 **粗体** 等 inline markdown
   stats:
-    - text: "📚 代表作品或經歷 **X** 項"
+    - text: "📚 代表作品或经历 **X** 项"
       url: "https://www.tenlong.com.tw/products/9786264142083"
-    - text: "🎤 累積授課或分享 **X** 場"
+    - text: "🎤 累积授课或分享 **X** 场"
       url: "https://www.youtube.com/@dlcorner"
-    - text: "✍️ 發表內容或文章 **X** 篇"
+    - text: "✍️ 发表内容或文章 **X** 篇"
       url: "https://medium.com/@dean-lin"
-  # 支援平台：Medium, Facebook, Threads, YouTube, GitHub, LinkedIn, Email
+  # 支持平台：Medium, Facebook, Threads, YouTube, GitHub, LinkedIn, Email
   socials:
     - platform: "Medium"
       url: "https://medium.com/@dean-lin"
@@ -55,45 +55,45 @@ instructor:
     #   url: "mailto:example@example.com"
 
 # ---------------------------------------------------
-# 引言（opening 出現在講師介紹後、closing 出現在所有章節後）
+# 引言（opening 出现在讲师介绍后、closing 出现在所有章节后）
 # ---------------------------------------------------
 quotes:
   opening:
-    text: "這裡可放課程開場引言示意，<br>用一句話傳達主題精神與學習價值。"
-    # author: "某某人"  # 可選，不填則不顯示
+    text: "这里可放课程开场引言示意，<br>用一句话传达主题精神与学习价值。"
+    # author: "某某人"  # 可选，不填则不显示
   closing:
     text: >
-      這裡可放課程結尾引言示意，<br>
-      適合用來總結重點或延伸觀點。<br><br>
-      也可以作為鼓勵學員採取下一步行動的收尾文字。
+      这里可放课程结尾引言示意，<br>
+      适合用来总结重点或延伸观点。<br><br>
+      也可以作为鼓励学员采取下一步行动的收尾文字。
     # author: ""
 
 # ---------------------------------------------------
-# Hero 導覽按鈕
-# 預設從 content.md 的 # 章節自動產生，不需手動維護
-# 若需自訂按鈕文字，取消註解：
+# Hero 导航按钮
+# 默认从 content.md 的 # 章节自动生成，不需手动维护
+# 如需自定义按钮文字，取消注释：
 # ---------------------------------------------------
 # nav:
-#   - text: "自訂文字"
+#   - text: "自定义文字"
 #     href: "#section-id"
 
 # ---------------------------------------------------
-# 頁尾
+# 页尾
 # ---------------------------------------------------
 footer:
-  cta: "這裡可放頁尾 CTA 示意，例如追蹤社群、加入社群或查看更多相關課程"
+  cta: "这里可放页尾 CTA 示例，例如关注社群、加入社群或查看更多相关课程"
   copyright: "© 可以放自己的名字"
-  # show_socials: true 會在 footer 重複顯示社群連結
+  # show_socials: true 会在 footer 重复显示社群链接
   show_socials: true
 
 # ---------------------------------------------------
 # SEO / Open Graph
-# 重要：image 必須使用絕對 URL，社群平台無法解析相對路徑
+# 重要：image 必须使用绝对 URL，社群平台无法解析相对路径
 # ---------------------------------------------------
 seo:
-  site_name: "網站名稱示意"
+  site_name: "网站名称示意"
   type: "article"
-  title: "課程 SEO 標題示意｜主題與亮點摘要"
-  description: "這裡可放 SEO 描述示意，建議濃縮課程內容、目標受眾與可獲得成果。"
+  title: "课程 SEO 标题示意｜主题与亮点摘要"
+  description: "这里可放 SEO 描述示意，建议浓缩课程内容、目标受众与可获得成果。"
   image: "https://your-domain.example/course/example/assets/og-image.jpg"
   url: "https://your-domain.example/course/example/"
