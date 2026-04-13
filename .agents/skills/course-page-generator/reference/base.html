@@ -1,8 +1,8 @@
 <!--
-  Base HTML Template for Course Page Generator
-  - CSS 和 JS 是完整的，直接複製使用
-  - HTML body 區塊用 {{PLACEHOLDER}} 標記，需由 Skill 根據 config + content 填入
-  - 產出時移除所有註解和 placeholder 說明
+  课程页面生成器基础模板
+  - CSS 和 JS 已完整，可直接复制使用
+  - HTML body 区块用 {{PLACEHOLDER}} 标记，需由 Skill 根据 config + content 填充
+  - 生成时请移除所有注释和 placeholder 说明
 -->
 <!DOCTYPE html>
 <html lang="{{PAGE_LANG}}" {{PAGE_MODE}}>
@@ -3646,8 +3646,8 @@
     </div>
     <div class="settings-divider"></div>
     <div class="settings-section">
-      <div class="settings-label">匯出</div>
-      <button class="settings-export-btn" id="export-pdf-btn">⬇ 匯出 PDF（投影片版）</button>
+      <div class="settings-label">导出</div>
+      <button class="settings-export-btn" id="export-pdf-btn">⬇ 导出 PDF（幻灯片版）</button>
     </div>
     <div class="settings-divider"></div>
     <div class="settings-section">
@@ -3662,18 +3662,18 @@
       <button class="break-modal-close" id="break-modal-close">✕</button>
       <div class="break-modal-icon" id="break-modal-icon">☕</div>
       <h3>休息一下</h3>
-      <p id="break-intro-text">設定休息時間，時間到會提醒你</p>
+      <p id="break-intro-text">设置休息时间，时间到会提醒你</p>
       <div id="break-setup">
         <div class="break-input-row">
           <input type="number" id="break-minutes" value="10" min="1" max="120">
-          <span>分鐘</span>
+          <span>分钟</span>
         </div>
-        <button class="break-start-btn" id="break-start-btn">開始休息</button>
+        <button class="break-start-btn" id="break-start-btn">开始休息</button>
       </div>
       <div class="break-countdown" id="break-countdown">
         <div class="break-countdown-time" id="break-countdown-time">10:00</div>
-        <p class="break-done-message" id="break-done-message"><strong>休息時間到</strong><br>回來繼續下一段內容吧。</p>
-        <button class="break-end-btn" id="break-end-btn">結束休息</button>
+        <p class="break-done-message" id="break-done-message"><strong>休息时间到</strong><br>回来继续下一段内容吧。</p>
+        <button class="break-end-btn" id="break-end-btn">结束休息</button>
       </div>
     </div>
   </div>
@@ -3762,7 +3762,7 @@
       localStorage.setItem('sidebar-collapsed', c);
     });
 
-    // Scroll spy — 這兩個陣列需根據實際內容填入
+    // Scroll spy
     var sectionIds = {{ SECTION_IDS }};        // e.g. ['instructor','new-project','old-project','testing','summary']
     var allAnchorIds = {{ ALL_ANCHOR_IDS }};   // e.g. ['instructor','new-project','sub-create-project',...]
 
@@ -4163,7 +4163,7 @@
             countdownDiv.classList.add('done');
             modal.classList.add('done');
             modalIcon.textContent = '⏰';
-            endBtn.textContent = '回到課程';
+            endBtn.textContent = '回到课程';
             return;
           }
           update();
@@ -4175,7 +4175,7 @@
 
     function exportPDF() {
       var sections = document.querySelectorAll('section.section');
-      if (!sections.length) { alert('找不到課程章節，請確認頁面已正常載入。'); return; }
+      if (!sections.length) { alert('找不到课程章节，请确认页面已正常加载。'); return; }
 
       var printSlides = document.createElement('div');
       printSlides.id = 'print-slides';
@@ -4325,7 +4325,7 @@
 
           var hint = document.createElement('div');
           hint.className = 'youtube-print-link-hint';
-          hint.textContent = '可點擊此頁面直接開啟影片';
+          hint.textContent = '可点击链接在浏览器中观看';
           link.appendChild(hint);
 
           youtubeBody.appendChild(link);
