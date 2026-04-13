@@ -1,258 +1,258 @@
-# 新專案：用 SDD 讓 AI 根據規格建立專案
-> 規格驅動開發（Spec-Driven Development）— 讓 AI 不只寫程式，還幫你建立完善的規格文件
+# 新项目：用 SDD 让 AI 根据规格建立项目
+> 规格驱动开发（Spec-Driven Development）— 让 AI 不只写程序，还帮你建立完善的规格文档
 
 ## OpenSpec 初始化
 
-### 🔧 為什麼需要 OpenSpec？
-- AI 寫程式越來越快，但專案越改越亂，甚至越改越壞
-- 關鍵人物離職，沒有文件，系統知識直接斷層
-- 解法：白話文對話 → AI 自動建立規格文件 → 根據規格驅動開發
+### 🔧 为什么需要 OpenSpec？
+- AI 写程序越来越快，但项目越改越乱，甚至越改越坏
+- 关键人物离职，没有文档，系统知识直接断层
+- 解法：白话对话 → AI 自动建立规格文档 → 根据规格驱动开发
 
-### 📦 安裝與初始化
+### 📦 安装与初始化
 
-```prompt [label="安裝指令"]
+```prompt [label="安装指令"]
 npm install -g @fission-ai/openspec@latest
 openspec init
 ```
 
-- 選擇使用的 AI 工具（Claude / Cursor）
-- 產生 `.claude` / `.cursor` 下的 Agent Skills
+- 选择使用的 AI 工具（Claude / Cursor）
+- 生成 `.claude` / `.cursor` 下的 Agent Skills
 
-### ⚡ Skills 與 Commands
-- **Skills** — AI 在對話過程中自動觸發的技能包，不需要背指令
-- **Commands** — 用 `/opsx` 前綴強制驅動：apply / archive / explore / propose
-- 可透過 `openspec config profile` 擴充更多 workflows
+### ⚡ Skills 与 Commands
+- **Skills** — AI 在对话过程中自动触发的技能包，不需要背命令
+- **Commands** — 用 `/opsx` 前缀强制驱动：apply / archive / explore / propose
+- 可通过 `openspec config profile` 扩充更多 workflows
 
 ```prompt [label="查看 Skill"]
-我想知道 openspec 目前安裝的 skill 用途
-請使用表格呈現，用白話簡短描述
+我想知道 openspec 目前安装的 skill 用途
+请使用表格呈现，用白话简短描述
 ```
 
-## 從零建立專案
+## 从零建立项目
 
-### 🎯 Prompt 設計三要素
+### 🎯 Prompt 设计三要素
 
 [flow]
-1. 專案目標 — 大方向描述需求，AI 會釐清細節
-2. 使用技術 — 指定技術棧，便於團隊接手
-3. 細節討論 — 提醒 AI 主動提問，釐清模糊需求
+1. 项目目标 — 大方向描述需求，AI 会厘清细节
+2. 使用技术 — 指定技术栈，便于团队接手
+3. 细节讨论 — 提醒 AI 主动提问，厘清模糊需求
 [/flow]
 
 ```prompt [label="建立 Dashboard（Plan Mode）"]
-請設計一個公司內部 Dashboard 系統，包含以下功能：
-- 登入頁面（帳號密碼驗證，區分管理者與一般使用者）
-- 首頁儀表板（顯示關鍵數據卡片：營收、訂單數、活躍用戶數、轉換率）
-- 資料圖表頁（折線圖、長條圖，支援日期篩選）
-- 員工管理頁（管理者可檢視、新增、編輯、刪除員工資料）
+请设计一个公司内部 Dashboard 系统，包含以下功能：
+- 登录页面（账号密码验证，区分管理员与一般用户）
+- 首页仪表板（显示关键数据卡片：营收、订单数、活跃用户数、转化率）
+- 数据图表页（折线图、柱状图，支持日期筛选）
+- 员工管理页（管理员可查看、新增、编辑、删除员工资料）
 
-前端使用 React + TypeScript，使用 Mock API 模擬後端回應
-這是初步需求，我們可以透過討論釐清細節後，參考 openspec 的 skill 執行
-以最小可行性方案來規劃
+前端使用 React + TypeScript，使用 Mock API 模拟后端响应
+这是初步需求，我们可以通过讨论厘清细节后，参考 openspec 的 skill 执行
+以最小可行方案来规划
 ```
 
-### 📋 OpenSpec 自動建立規格文件
+### 📋 OpenSpec 自动建立规格文档
 
 [flow]
-1. proposal.md — 確認目標與範圍
-2. design.md — 技術選型與風險評估
-3. specs/ — 按功能分類的詳細規格
-4. task.md — 任務清單，完成自動打勾
+1. proposal.md — 确认目标与范围
+2. design.md — 技术选型与风险评估
+3. specs/ — 按功能分类的详细规格
+4. task.md — 任务清单，完成后自动打勾
 [/flow]
 
-```prompt [label="開始實作"]
-開始實作
+```prompt [label="开始实作"]
+开始实作
 ```
 
-> **AI 正在改變企業決策**
-> 過去 Dashboard 這類系統，企業通常找廠商購買、支付年費維護。但 Vibe Coding 的出現正讓企業做出不同的選擇。
+> **AI 正在改变企业决策**
+> 过去 Dashboard 这类系统，企业通常找厂商购买、支付年费维护。但 Vibe Coding 的出现正让企业做出不同的选择。
 >
-> 有些企業導入 Vibe Coding 的目標不是取代工程師，而是讓熟悉業務的人有能力設計出符合使用需求的產品原型，再交給工程師做優化與維護。
+> 有些企业导入 Vibe Coding 的目标不是取代工程师，而是让熟悉业务的人有能力设计出符合使用需求的产品原型，再交给工程师做优化与维护。
 >
-> 用 OpenSpec 建立規格文件 — 就是讓這個交接過程有據可循，而不是一團無文件的程式碼丟過去。
+> 用 OpenSpec 建立规格文档 —— 就是让这个交接过程有据可循，而不是丢过去一团没有文档的程序代码。
 
-```prompt [label="歸檔"]
-功能符合預期，進行歸檔
+```prompt [label="归档"]
+功能符合预期，进行归档
 ```
 
-## 建立專案規則
+## 建立项目规则
 
-### 📐 建立專案規則
+### 📐 建立项目规则
 
-```prompt [label="初始化規則"]
+```prompt [label="初始化规则"]
 /init
 ```
 
-```prompt [label="OpenSpec 設定"]
+```prompt [label="OpenSpec 设置"]
 Please read openspec/config.yaml and help me fill it out
 with details about my project, tech stack, and conventions
 ```
 
-**CLAUDE.md** 是給「做事」用的，**config.yaml** 是給「規劃」用的
+**CLAUDE.md** 是给“做事”用的，**config.yaml** 是给“规划”用的
 
 ---
 
-# 舊專案：根據情境設計 Skills，讓 AI 有執行依據
-> 最難的不是 0 到 1，而是 1 到 100；透過 Skills 設計，讓 AI 在迭代功能、版本控制、Code Review 都有規範可循
+# 旧项目：根据情境设计 Skills，让 AI 有执行依据
+> 最难的不是 0 到 1，而是 1 到 100；通过 Skills 设计，让 AI 在迭代功能、版本控制、Code Review 时都有规范可循
 
 ## OpenSpec 迭代
 
 ### ⚠️ 版本控制的必要性
-- 反面案例：一個 PR 塞了 18 個檔案、近千行變更、只有一個 commit
-- 結果：無法追蹤設計邏輯、Code Review 形同虛設
-- AI 加速開發後，這個問題被成倍放大
+- 反面案例：一个 PR 塞了 18 个文件、近千行变更、只有一个 commit
+- 结果：无法追踪设计逻辑、Code Review 形同虚设
+- AI 加速开发后，这个问题被成倍放大
 
 ```prompt [label="新增功能"]
-幫我設計 Dashboard 的深色/淺色主題切換功能
-上方導覽列新增切換按鈕，使用者偏好存在 localStorage
+帮我设计 Dashboard 的深色/浅色主题切换功能
+上方导航栏新增切换按钮，用户偏好存在 localStorage
 使用 OpenSpec
 ```
 
-```prompt [label="確認後實作"]
-開始實作
+```prompt [label="确认后实作"]
+开始实作
 ```
 
-> **為什麼 1 到 100 比 0 到 1 更難？**
-> 如果沒有規格文件，下次改功能時 AI 不知道之前的設計邏輯，可能把同一個功能重複寫好幾次，或改 A 壞 B。
+> **为什么 1 到 100 比 0 到 1 更难？**
+> 如果没有规格文档，下次改功能时 AI 不知道之前的设计逻辑，可能把同一个功能重复写好几次，或者改 A 坏 B。
 >
-> 用 OpenSpec 每次迭代都會在 Source Control 留下規格變更，AI 跟人類都有文件可以參考。關鍵人物離職最痛的不是少了一個人，而是系統知識直接斷層。
+> 用 OpenSpec 每次迭代都会在 Source Control 留下规格变更，AI 和人类都有文档可以参考。关键人物离职最痛的不是少了一个人，而是系统知识直接断层。
 
-```prompt [label="歸檔變更"]
-幫我歸檔
+```prompt [label="归档变更"]
+帮我归档
 ```
 
-⭐ 保持好習慣：每做完一件事就 commit，不要多功能混一起
+⭐ 保持好习惯：每做完一件事就 commit，不要把多个功能混在一起
 
-## 設定 Commit Skill
+## 设置 Commit Skill
 
-### 📝 為什麼需要 Commit Skill？
+### 📝 为什么需要 Commit Skill？
 
 [tags]
-- [orange] 人工手打：耗時且風格不一致
-- [purple] AI 自動生成：長短隨機、中英混雜
+- [orange] 手动输入：耗时且风格不一致
+- [purple] AI 自动生成：长短随机、中英混杂
 - [green] 解法：git-smart-commit Skill
 [/tags]
 
-- 分析變更的檔案 → 判斷應拆成幾個 commit → 分段提交
-- 不同功能的修改分開 commit，讓邏輯可被追蹤
+- 分析变更的文件 → 判断应拆成几个 commit → 分段提交
+- 不同功能的修改分开 commit，让逻辑可被追踪
 
 ```prompt [label="拆分 Commit"]
 新增 commit
 ```
 
-> **AI 產生的程式碼很多，但這不是你不看的原因**
-> 導入 AI 後 Code Review 的負擔大幅增加，有些公司認為一天要完成 3 倍工作量才算達標。結果大家犧牲深度思考、懶得 Code Review。
+> **AI 生成的代码很多，但这不是你不看的理由**
+> 导入 AI 后 Code Review 的负担大幅增加，有些公司认为一天要完成 3 倍工作量才算达标。结果大家牺牲深度思考，懒得 Code Review。
 >
-> 讓 AI 根據 Skill 拆分 commit — 就是在降低認知負擔。每個 commit 只包含一件事，審核的人可以一步步理解設計邏輯。AI 產生的程式碼很多，但我們該想的是怎麼更有效率的去審核，而不是放棄審核。
+> 让 AI 根据 Skill 拆分 commit —— 就是在降低认知负担。每个 commit 只包含一件事，审核的人可以一步步理解设计逻辑。AI 生成的代码很多，但我们该想的是怎么更高效地审核，而不是放弃审核。
 
-## 設定 PR Skill
+## 设置 PR Skill
 
 ### 🔀 git-pr-description Skill
-- 比對當前分支與目標分支的差異
-- 讀取 commit 訊息與變更檔案
-- 參考 `pr-template` 生成 Title 與 Description
+- 比对当前分支与目标分支的差异
+- 读取 commit 信息与变更文件
+- 参考 `pr-template` 生成 Title 与 Description
 
 ```prompt [label="生成 PR"]
-撰寫 PR
+撰写 PR
 ```
 
-## Git Worktree 並行開發
+## Git Worktree 并行开发
 
-### 🌳 多 Agent 並行開發
-- 不同功能使用不同 feature branch，搭配 Git Worktree 建立獨立工作區
-- 每個 Worktree 可同時跑不同 dev server，讓多個 AI Agent 並行開發
-- 設計 `git-worktree-design` Skill：一個指令拆分任務、建立 Worktree、安裝套件、新增 SPEC
+### 🌳 多 Agent 并行开发
+- 不同功能使用不同 feature branch，搭配 Git Worktree 建立独立工作区
+- 每个 Worktree 可同时运行不同 dev server，让多个 AI Agent 并行开发
+- 设计 `git-worktree-design` Skill：一个指令拆分任务、建立 Worktree、安装套件、新增 SPEC
 
-```prompt [label="Worktree 並行開發"]
-採用 Worktree，新增通知中心彈窗、資料匯出 CSV 功能、常見 QA 問答區
+```prompt [label="Worktree 并行开发"]
+采用 Worktree，新增通知中心弹窗、数据导出 CSV 功能、常见 QA 问答区
 ```
 
-> **人，才是 AI 的瓶頸**
-> Code Review 的速度已經跟不上 AI 寫程式的速度。當人成為 AI 的瓶頸時，要去想的是如何降低門檻，而不是放棄審核。
+> **人，才是 AI 的瓶颈**
+> Code Review 的速度已经跟不上 AI 写程序的速度。当人成为 AI 的瓶颈时，要思考的是如何降低门槛，而不是放弃审核。
 >
-> 每個功能單獨驗證，Code Review 時只需專注一件事。雖然每一步都是 AI 在執行，但如果沒有業界經驗，其實不知道怎麼串起這些工具。**真正值錢的不是工具本身，而是知道什麼時候用、怎麼組合。**
+> 每个功能单独验证，Code Review 时只需专注一件事。虽然每一步都是 AI 在执行，但如果没有业界经验，其实不知道怎么把这些工具串起来。**真正值钱的不是工具本身，而是知道什么时候用、怎么组合。**
 
-### ⚠️ Worktree 注意事項
-- 合併時可能有衝突：各分支獨立開發，不知彼此變更
-- 建議共用功能優先開發、主分支變更時其他 Worktree 先同步
-- 設計好流程才能提升效率
+### ⚠️ Worktree 注意事项
+- 合并时可能有冲突：各分支独立开发，不知道彼此变更
+- 建议共用功能优先开发、主分支变更时其他 Worktree 先同步
+- 设计好流程才能提升效率
 
 ---
 
-# 導入測試：讓維護與擴充更有底氣
-> 市場不會為爛產品買單；加入自動化測試，是 Vibe Coding 從玩具走向產品的關鍵
+# 导入测试：让维护与扩展更有底气
+> 市场不会为烂产品买单；加入自动化测试，是 Vibe Coding 从玩具走向产品的关键
 
-### 🛡️ 為什麼 Vibe Coding 一定要測試？
+### 🛡️ 为什么 Vibe Coding 一定要测试？
 
 [flow]
-1. 穩定性 — 請 AI 修 bug，結果舊功能壞掉
-2. 複雜度 — 功能越多，人工測試越不可能覆蓋全部
-3. 擴充性 — 功能間有相依性，修改可能引發連鎖影響
+1. 稳定性 — 请 AI 修 bug，结果旧功能坏掉
+2. 复杂度 — 功能越多，人工测试越不可能覆盖全部
+3. 扩展性 — 功能之间有依赖性，修改可能引发连锁影响
 [/flow]
 
-不寫測試才浪費時間 — 測試讓你敢大膽修改，遇錯快速定位
+不写测试才浪费时间 —— 测试让你敢大胆修改，出错时能快速定位
 
 ## gen-test-cases
 
-### 🔄 測試撰寫流程
+### 🔄 测试编写流程
 
 [flow]
-1. 建立資料夾 — 存放測試清單
-2. AI 撰寫清單 — 類型、說明、輸入、期待輸出
-3. 人類 Review — 確認情境有無遺漏
-4. AI 撰寫測試 — 描述與文件一致
-5. 自主驗證 — 最多嘗試 5 次
+1. 建立文件夹 — 存放测试清单
+2. AI 编写清单 — 类型、说明、输入、期待输出
+3. 人类 Review — 确认情境有无遗漏
+4. AI 编写测试 — 描述与文档一致
+5. 自主验证 — 最多尝试 5 次
 [/flow]
 
-```prompt [label="生成測試案例"]
+```prompt [label="生成测试案例"]
 /gen-test-cases
 （拖入 src/pages/LoginPage.tsx）
 ```
 
-> **從玩具到產品，差的就是測試**
-> 很多時候 AI 只是修好了眼前的錯誤，但過程中改壞了過去的邏輯。千萬不要嫌寫測試浪費時間 — 測試其實是在幫你加速開發。
+> **从玩具到产品，差的就是测试**
+> 很多时候 AI 只是修好了眼前的错误，但过程中改坏了过去的逻辑。千万不要嫌写测试浪费时间 —— 测试其实是在帮你加速开发。
 >
-> 現在有 AI 了，你不用自己寫測試程式，只要審核 AI 給的測試情境是否有遺漏就好。
+> 现在有 AI 了，你不用自己写测试程序，只要审核 AI 给出的测试情境是否有遗漏就好。
 
-### ✅ 登入頁測試情境範例
+### ✅ 登录页测试情境示例
 
-- [x] 電子郵件格式錯誤 → 前端擋住、不呼叫 API
-- [x] 密碼不符規則 → 顯示對應錯誤訊息
-- [x] 格式正確 → 呼叫 Mock API → 成功取得 Token
-- [x] Mock API 回傳密碼錯誤 / 帳號不存在 → 顯示錯誤
-- [x] 管理者登入 → 顯示員工管理頁入口；一般用戶 → 不顯示
-- [x] 無 Token 時直接存取 Dashboard → 導向登入頁
+- [x] 电子邮件格式错误 → 前端拦住，不调用 API
+- [x] 密码不符合规则 → 显示对应错误信息
+- [x] 格式正确 → 调用 Mock API → 成功取得 Token
+- [x] Mock API 返回密码错误 / 账号不存在 → 显示错误
+- [x] 管理员登录 → 显示员工管理页入口；一般用户 → 不显示
+- [x] 没有 Token 时直接访问 Dashboard → 导向登录页
 
-### 💡 實務建議
-- 不要一口氣生成所有測試，先放一個檔案確認結果符合預期
-- 每個頁面/模組有獨立的測試程式，方便定位問題
-- 測試案例會隨規格變更而調整，不可能一次到位
+### 💡 实务建议
+- 不要一口气生成所有测试，先放一个文件确认结果符合预期
+- 每个页面/模块有独立的测试程序，方便定位问题
+- 测试案例会随着规格变更而调整，不可能一次到位
 
-## GitHub Action 自動化
+## GitHub Action 自动化
 
-```prompt [label="自動化測試"]
-我希望在 GitHub Action 加入自動化測試的流程
-每一個分支將更新推送到 GitHub 都會觸發一次自動化測試
-測試完畢後，要生成覆蓋率報告讓我下載
+```prompt [label="自动化测试"]
+我希望在 GitHub Action 中加入自动化测试流程
+每个分支将更新推送到 GitHub 时都会触发一次自动化测试
+测试完成后，要生成覆盖率报告让我下载
 ```
 
-> **企業內訓的真實回饋**
-> 講師設計的教材是最佳體驗路徑，但換到自己的專案情境一定會遇到不一樣的問題。回去後不要只是複製指令，而是把流程搬到自己的專案試一遍。
+> **企业内训的真实反馈**
+> 讲师设计的教材是最佳体验路径，但换到自己的项目情境一定会遇到不同问题。回去后不要只是复制指令，而是把流程搬到自己的项目里实际跑一遍。
 >
-> **學習 AI 不是搜集指令複製貼上，更重要的是了解應用情境後，透過實踐調整為適合自己的工作流。**
+> **学习 AI 不是搜集指令后复制粘贴，更重要的是理解应用情境后，通过实践调整为适合自己的工作流。**
 
-### 🔁 自動化測試流程
-- 每次推送到 GitHub 都觸發測試
-- 測試完畢生成覆蓋率報告
-- 設定 Branch Protection Rule：測試通過才能合併到主分支
+### 🔁 自动化测试流程
+- 每次推送到 GitHub 都触发测试
+- 测试完成后生成覆盖率报告
+- 设置 Branch Protection Rule：测试通过才能合并到主分支
 
-測試覆蓋率不需追求 100%，重要的邏輯都要測試到。有了測試，規格書上的功能才能被真正驗證。
+测试覆盖率不需要追求 100%，重要逻辑都要测到。有了测试，规格书上的功能才能真正被验证。
 
 ---
 
-# 總結
+# 总结
 
 [summary]
-- 🏗️ **新專案 — SDD** | OpenSpec + Spec-Driven Development，讓 AI 根據規格建立 Dashboard，同時產生完善文件
-- ⚙️ **舊專案 — Skills** | 設計 Commit / PR / Worktree Skills，讓 AI 在大型專案中有規範可循
-- 🧪 **導入測試 — CI/CD** | 用 Workflow 驅動 AI 撰寫測試，搭配 GitHub Action 守住品質底線
+- 🏗️ **新项目 — SDD** | OpenSpec + Spec-Driven Development，让 AI 根据规格建立 Dashboard，同时产出完善文档
+- ⚙️ **旧项目 — Skills** | 设计 Commit / PR / Worktree Skills，让 AI 在大型项目中有规范可循
+- 🧪 **导入测试 — CI/CD** | 用 Workflow 驱动 AI 编写测试，搭配 GitHub Action 守住质量底线
 [/summary]

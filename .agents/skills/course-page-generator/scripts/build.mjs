@@ -661,14 +661,14 @@ function buildTocItems(sections) {
   let html = '';
   html += `<li class="toc-group" data-section="instructor">
       <a href="#instructor" class="toc-group-title">
-        <span class="toc-num">\u{1F464}</span> 講師簡介
+        <span class="toc-num">\u{1F464}</span> 讲师简介
       </a>
       <ul class="toc-sub"></ul>
     </li>\n`;
 
   for (const sec of sections) {
     const navLabel = sec.label.replace(/[：:].*/, '').trim();
-    const numDisplay = sec.label === '總結' ? '★' : sec.num;
+    const numDisplay = sec.label === '总结' ? '★' : sec.num;
     html += `    <li class="toc-group" data-section="${sec.id}">
       <a href="#${sec.id}" class="toc-group-title">
         <span class="toc-num">${numDisplay}</span> ${esc(navLabel)}
@@ -704,8 +704,8 @@ function buildInstructor(cfg) {
 
   return `<section class="section">
   <div class="reveal">
-    <span class="section-label" id="instructor"><span class="num">\u{1F464}</span> 講師簡介</span>
-    <h2>關於講師</h2>
+    <span class="section-label" id="instructor"><span class="num">\u{1F464}</span> 讲师简介</span>
+    <h2>关于讲师</h2>
   </div>
   <div class="reveal">
     <div class="instructor">

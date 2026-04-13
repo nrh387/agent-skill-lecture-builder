@@ -1,20 +1,19 @@
 page:
-  lang: zh-TW
-  favicon: "https://deanlin.net/images/favicon.png"
+  lang: zh-CN
 
 instructor:
-  name: "工程師下班有約"
-  tagline: "AI 企業講師 · 擅長團隊培訓 · 百大企業指定"
+  name: "Insights Hub 有約"
+  tagline: "AI 企业讲师 · 擅长团队培训 · 百大企业指定"
   bio: >
-    專注於 AI 開發工作流的實踐與推廣。<br>
-    擅長將複雜的技術概念轉化為可落地的工作流程，讓團隊真正提升開發效率而非盲目追逐工具。
+    专注于 AI 开发工作流的实践与推广。<br>
+    擅长将复杂的技术概念转化为可落地的工作流程，让团队真正提升开发效率而非盲目追逐工具。
   avatar: "config/assets/author"
   stats:
-    - text: "📚 出版 **7** 本專業書籍"
+    - text: "📚 出版 **7** 本专业书籍"
       url: "https://www.tenlong.com.tw/search?keyword=%E6%9E%97%E9%BC%8E%E6%B7%B5"
-    - text: "🎤 超過 **100** 場講座"
+    - text: "🎤 超过 **100** 场讲座"
       url: "https://www.youtube.com/@dean-lin"
-    - text: "✍️ 發表超過 **400** 篇文章"
+    - text: "✍️ 发表超过 **400** 篇文章"
       url: "https://medium.com/@dean-lin"
   socials:
     - platform: "Facebook"
@@ -28,19 +27,19 @@ instructor:
 
 quotes:
   opening:
-    text: "這裡可放課程開場金句示意，<br>用一句話建立主題氛圍與價值。"
+    text: "这里可放课程开场金句示意，<br>用一句话建立主题氛围与价值。"
   closing:
     text: >
-      這裡可放課程結尾金句示意，<br>
-      收束整體內容並強化核心觀點。<br><br>
-      可用來引導學員後續行動或延伸學習。
+      这里可放课程结尾金句示意，<br>
+      收束整体内容并强化核心观点。<br><br>
+      可用来引导学员后续行动或延伸学习。
 
 
 seo:
-  title: "課程標題示意｜主題副標示意"
-  description: "歡迎追蹤我的社群，獲取更多 AI 開發實戰內容"
+  title: "课程标题示意｜主题副标示意"
+  description: "欢迎关注我的社群，获取更多 AI 开发实战内容"
 
 footer:
-  cta: "歡迎追蹤我的社群，獲取更多 AI 開發實戰內容"
-  copyright: "© 工程師下班有約"
+  cta: "欢迎关注我的社群，获取更多 AI 开发实战内容"
+  copyright: "© Insights Hub 有約"
   show_socials: true

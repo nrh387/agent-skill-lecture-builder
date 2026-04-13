@@ -1,0 +1,20 @@
+page:
+  lang: zh-CN
+  title: "使用 OpenSpec 进行 SDD 开发"
+  badge: "AI Coding 实战"
+  hero_title: "使用 OpenSpec 进行 SDD 开发<br>从想法到可维护交付"
+  subtitle: "扮演 AI Coding 专家，建立可复用、可审计、可协作的规格驱动工作流"
+
+seo:
+  title: "使用 OpenSpec 进行 SDD 开发"
+  description: "一套面向团队的 Spec-Driven Development 实战讲义：需求澄清、规格沉淀、任务拆解、自动化验证。"
+  image: "https://nrh387.github.io/agent-skill-lecture-builder/openspec-sdd/assets/og-image.jpg"
+  url: "https://nrh387.github.io/agent-skill-lecture-builder/openspec-sdd/"
+
+quotes:
+  opening:
+    text: "先让规格清晰，再让 AI 高速编码。<br>速度不是目标，可持续交付才是。"
+  closing:
+    text: >
+      OpenSpec 不是替你做决定，<br>
+      而是把正确决策沉淀成团队资产。

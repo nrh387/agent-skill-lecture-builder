@@ -1,37 +1,37 @@
 # Course Page Generator
 
-提供主題 or Markdown 講稿，透過 Agent Skills 單一 HTML 課程頁面。
+提供主题或 Markdown 讲稿，通过 Agent Skills 生成单一 HTML 课程页面。
 
-## Quick Start
+## 快速开始
 
 ```bash
-# 安裝依賴（OG 縮圖產生需要 puppeteer）
+# 安装依赖（生成 OG 缩略图需要 puppeteer）
 npm install
 ```
 
-在 AI 對話窗輸入「幫我生成課程頁面」這類指令，AI 會自動觸發 `course-page-generator` Skill 完成所有步驟。
+在 AI 对话窗口输入“帮我生成课程页面”这类指令，AI 会自动触发 `course-page-generator` Skill 完成所有步骤。
 
-### 情境一：給主題，從零生成
+### 情境一：给主题，从零生成
 
-只提供主題，AI 自動生成完整課程內容：
-
-```
-扮演一位擅長用實際案例解說的資安專家，設計"生成式 AI 資訊安全"的講義並生成網頁，完成後直接啟動
-```
-
-AI 會依序：生成 `content.md` + `config.yaml` → build `index.html` → 產生 OG 縮圖 → 啟動本地預覽
-
-### 情境二：給講稿，輔助轉換
-
-提供現有的講稿、筆記或大綱，AI 將其轉換為結構化課程頁面：
+只提供主题，AI 自动生成完整课程内容：
 
 ```
-幫我把這份講稿轉成課程頁面（貼上講稿內容，或指定檔案路徑）
+扮演一位擅长用实际案例讲解的资安专家，设计“生成式 AI 信息安全”的讲义并生成网页，完成后直接启动
 ```
 
-AI 會依序：萃取重點轉為結構化 `content.md` → 建立 `config.yaml` → build `index.html` → 產生 OG 縮圖
+AI 会依序执行：生成 `content.md` + `config.yaml` → build `index.html` → 生成 OG 缩略图 → 启动本地预览
 
-## 專案結構
+### 情境二：给讲稿，辅助转换
+
+提供现有讲稿、笔记或大纲，AI 会将其转换为结构化课程页面：
+
+```
+帮我把这份讲稿转成课程页面（贴上讲稿内容，或指定文件路径）
+```
+
+AI 会依序执行：提炼重点并转换为结构化 `content.md` → 建立 `config.yaml` → build `index.html` → 生成 OG 缩略图
+
+## 项目结构
 
 ```
 agent-skill-lecture-builder/
@@ -39,43 +39,43 @@ agent-skill-lecture-builder/
 │   └── skills/
 │       └── course-page-generator/
 │           ├── scripts/
-│           │   ├── build.mjs        # 建置課程頁
-│           │   ├── dev.mjs          # 本機預覽
-│           │   └── generate-og.mjs  # 產出 1200x630 OG 圖
+│           │   ├── build.mjs        # 构建课程页面
+│           │   ├── dev.mjs          # 本地预览
+│           │   └── generate-og.mjs  # 生成 1200x630 OG 图
 │           └── reference/
 │               ├── base.html
 │               ├── components.md
 │               └── config-example.yaml
 ├── config/
-│   ├── global.yaml          # 全域設定（講者、社群、頁尾）
-│   └── assets/              # 共用圖片（avatar 等）
-├── example/                 # 課程目錄示意（建立後會包含下列檔案）
-│   ├── config.yaml          # 課程專屬設定（覆蓋 global）
-│   ├── content.md           # 結構化 Markdown 講稿
-│   ├── index.html           # build 產出
+│   ├── global.yaml          # 全局设置（讲师、社群、页脚）
+│   └── assets/              # 共用图片（avatar 等）
+├── example/                 # 课程目录示意（建立后会包含下列文件）
+│   ├── config.yaml          # 课程专属设置（覆盖 global）
+│   ├── content.md           # 结构化 Markdown 讲稿
+│   ├── index.html           # build 产出
 │   └── assets/
-│       └── og-*.jpg         # generate-og.mjs 產出
+│       └── og-*.jpg         # generate-og.mjs 产出
 ├── package.json
 └── README.md
 ```
 
-## 新增一門課程
+## 新增一门课程
 
 ```bash
 mkdir -p my-course/assets
 ```
 
-1. **建立 `my-course/content.md`** — 用約定的 Markdown 語法撰寫講稿（或丟原始筆記給 AI，觸發 Skill 自動轉換）
-2. **建立 `my-course/config.yaml`** — 只需寫要覆蓋全域設定的欄位
+1. **建立 `my-course/content.md`** — 用约定的 Markdown 语法编写讲稿（或把原始笔记交给 AI，触发 Skill 自动转换）
+2. **建立 `my-course/config.yaml`** — 只需写要覆盖全局设置的字段
 3. **Build**
 
 ```bash
 node .agents/skills/course-page-generator/scripts/build.mjs my-course
 ```
 
-產出 `my-course/index.html`。
+产出 `my-course/index.html`。
 
-若只想單純啟動本機預覽：
+如果只想单纯启动本地预览：
 
 ```bash
 node .agents/skills/course-page-generator/scripts/dev.mjs my-course
@@ -87,55 +87,55 @@ node .agents/skills/course-page-generator/scripts/dev.mjs my-course
 node .agents/skills/course-page-generator/scripts/dev.mjs my-course --port 8080
 ```
 
-`dev.mjs` 會：
+`dev.mjs` 会：
 
-- 啟動本機伺服器
-- 先自動執行一次 build
-- 監看 `content.md`、`config.yaml`、`config/global.yaml`、`reference/base.html`
-- 存檔後自動重建並重新整理瀏覽器
+- 启动本地服务器
+- 先自动执行一次 build
+- 监听 `content.md`、`config.yaml`、`config/global.yaml`、`reference/base.html`
+- 保存后自动重建并刷新浏览器
 
-若只想產出靜態檔，不需要啟動 server：
+如果只想产出静态文件，不需要启动 server：
 
 ```bash
 node .agents/skills/course-page-generator/scripts/build.mjs my-course
 ```
 
-若要產出 OG 縮圖：
+如果要产出 OG 缩略图：
 
 ```bash
 node .agents/skills/course-page-generator/scripts/generate-og.mjs my-course
 ```
 
-## Config 機制
+## Config 机制
 
-兩層設定，deep merge：
+两层设置，deep merge：
 
-| 層級 | 檔案 | 內容 |
+| 层级 | 文件 | 内容 |
 |------|------|------|
-| 全域 | `config/global.yaml` | 講者資訊、社群連結、頁尾 |
-| 課程 | `<dir>/config.yaml` | 頁面標題、badge、hero、引言、導覽按鈕 |
+| 全局 | `config/global.yaml` | 讲师信息、社群链接、页脚 |
+| 课程 | `<dir>/config.yaml` | 页面标题、badge、hero、引言、导航按钮 |
 
-課程 config 只需寫要覆蓋的欄位，其餘繼承全域。陣列欄位（如 `socials`）會整個取代。
+课程 config 只需写要覆盖的字段，其余继承全局。数组字段（如 `socials`）会整体替换。
 
-`nav`（Hero 導覽按鈕）預設從 `content.md` 的 `#` 章節自動產生，不需在 config 維護。
+`nav`（Hero 导航按钮）默认从 `content.md` 的 `#` 章节自动生成，不需要在 config 维护。
 
-`config/global.yaml` 不必放在固定位置。Build 會從課程目錄往上搜尋最多 4 層父目錄，找到第一個 `config/global.yaml` 就使用。
+`config/global.yaml` 不必放在固定位置。Build 会从课程目录向上搜索最多 4 层父目录，找到第一个 `config/global.yaml` 就使用。
 
-### Global config 範例
+### Global config 示例
 
 ```yaml
 page:
-  lang: zh-TW
+  lang: zh-CN
 
 instructor:
-  name: "講者名稱"
-  tagline: "一句話介紹"
+  name: "讲师名称"
+  tagline: "一句话介绍"
   bio: >
-    這裡可放講者簡介。<br>
-    支援 HTML `<br>` 換行。
-  avatar: "config/assets/author"  # 可省略副檔名
+    这里可放讲师简介。<br>
+    支持 HTML `<br>` 换行。
+  avatar: "config/assets/author"  # 可省略扩展名
   stats:
-    - text: "📚 代表作品或經歷 **X** 項"
+    - text: "📚 代表作品或经历 **X** 项"
       url: "https://example.com/books"
   socials:
     - platform: "YouTube"
@@ -143,130 +143,130 @@ instructor:
 
 quotes:
   opening:
-    text: "課程開場金句"
+    text: "课程开场金句"
   closing:
     text: >
-      課程結尾金句
+      课程结尾金句
 
 footer:
-  cta: "頁尾行動呼籲"
+  cta: "页脚行动号召"
   copyright: "© 你的名字"
   show_socials: true
 
 seo:
-  title: "預設 SEO 標題"
-  description: "預設 SEO 描述"
+  title: "默认 SEO 标题"
+  description: "默认 SEO 描述"
   image: "https://your-domain.example/course/example/assets/og-image.jpg"
   url: "https://your-domain.example/course/example/"
 ```
 
-### 課程 config 範例
+### 课程 config 示例
 
 ```yaml
 page:
-  title: "課程標題"
+  title: "课程标题"
   badge: "BADGE 文字"
-  hero_title: "Hero 大標題<br>支援換行"
-  subtitle: "副標題"
+  hero_title: "Hero 大标题<br>支持换行"
+  subtitle: "副标题"
 
 quotes:
   opening:
-    text: "開場引言"
+    text: "开场引言"
   closing:
     text: >
-      結尾引言
+      结尾引言
 
-# nav 自動從 content.md 的 # 章節產生
-# 需要自訂時才寫：
+# nav 自动从 content.md 的 # 章节生成
+# 需要自定义时才写：
 # nav:
-#   - text: "自訂文字"
+#   - text: "自定义文字"
 #     href: "#section-id"
 ```
 
-如果你需要完整欄位，請直接參考 [`config-example.yaml`](./.agents/skills/course-page-generator/reference/config-example.yaml)。
+如果你需要完整字段，请直接参考 [config-example.yaml](./.agents/skills/course-page-generator/reference/config-example.yaml)。
 
-## Markdown 語法
+## Markdown 语法
 
-| 語法 | 用途 |
+| 语法 | 用途 |
 |------|------|
-| `# LABEL：TITLE` | 主章節 |
-| `> lead text`（緊接 `#`） | 章節引言 |
-| `## Title` | 子章節 |
+| `# LABEL：TITLE` | 主章节 |
+| `> lead text`（紧接 `#`） | 章节引言 |
+| `## Title` | 子章节 |
 | `### 🔧 Title` | 卡片 |
-| `` ```prompt [label="..."] `` | 終端機 / Prompt 區塊 |
+| `` ```prompt [label="..."] `` | 终端机 / Prompt 区块 |
 | `> **Bold Title**` | 洞察框 |
-| `[flow]...[/flow]` | 流程步驟 |
-| `[tags]...[/tags]` | 標籤（`green / orange / purple / blue`，必須用此區塊包裹） |
-| `[summary]...[/summary]` | 總結卡片 |
-| `[bonus title="..."]...[/bonus]` | Bonus 按鈕 + 彈窗 |
-| `- [x] item` | 勾選清單（僅用於已驗證/已完成的事項，不適合一般觀點條列） |
-| `![alt](src)` | 獨立圖片（置中、含說明文字） |
-| `[image-text]...[/image-text]` | 圖文並排（圖片＋文字左右排列，預設圖片佔 40%） |
-| `[youtube id="..." title="..."]` | YouTube 影片嵌入（16:9 響應式） |
-| `---` | 章節分隔線 |
+| `[flow]...[/flow]` | 流程步骤 |
+| `[tags]...[/tags]` | 标签（`green / orange / purple / blue`，必须用此区块包裹） |
+| `[summary]...[/summary]` | 总结卡片 |
+| `[bonus title="..."]...[/bonus]` | Bonus 按钮 + 弹窗 |
+| `- [x] item` | 勾选清单（仅用于已验证/已完成事项，不适合一般观点条列） |
+| `![alt](src)` | 独立图片（居中、含说明文字） |
+| `[image-text]...[/image-text]` | 图文并排（图片+文字左右排列，默认图片占 40%） |
+| `[youtube id="..." title="..."]` | YouTube 视频嵌入（16:9 响应式） |
+| `---` | 章节分隔线 |
 
-詳細語法與 HTML 對照見 [`components.md`](./.agents/skills/course-page-generator/reference/components.md)。
+详细语法与 HTML 对照见 [components.md](./.agents/skills/course-page-generator/reference/components.md)。
 
-### 圖片
+### 图片
 
-**獨立圖片（置中顯示）：**
+**独立图片（居中显示）：**
 ```markdown
-![架構示意圖](images/architecture.png)
+![架构示意图](images/architecture.png)
 ```
-- `alt` 文字自動成為圖片說明（figcaption）
-- 行內使用時（段落或列表中）會以 inline 方式渲染
+- `alt` 文字自动成为图片说明（figcaption）
+- 行内使用时（段落或列表中）会以内联方式渲染
 
-**圖文並排：**
+**图文并排：**
 ```markdown
 [image-text position="left" width="50"]
-![產品截圖](images/screenshot.png)
-這是產品的主要介面，提供了 **直覺式操作** 體驗。
-- 支援拖放操作
-- 即時預覽結果
+![产品截图](images/screenshot.png)
+这是产品的主要界面，提供了 **直觉式操作** 体验。
+- 支持拖放操作
+- 实时预览结果
 [/image-text]
 ```
-- `position="left"`（預設）：圖片在左、文字在右
-- `position="right"`：圖片在右、文字在左
-- `width="N"` 設定圖片佔比百分比（預設 40），例如 `width="30"` 或 `width="60"`
-- 文字區域支援段落、粗體、程式碼、連結、列表
-- 平板（≤ 900px）及手機自動改為上下排列
+- `position="left"`（默认）：图片在左、文字在右
+- `position="right"`：图片在右、文字在左
+- `width="N"` 设置图片占比百分比（默认 40），例如 `width="30"` 或 `width="60"`
+- 文字区域支持段落、粗体、代码、链接、列表
+- 平板（≤ 900px）及手机自动改为上下排列
 
-### YouTube 影片嵌入
+### YouTube 视频嵌入
 
-**單行（帶標題）：**
+**单行（带标题）：**
 ```markdown
-[youtube id="dQw4w9WgXcQ" title="Demo 影片"]
+[youtube id="dQw4w9WgXcQ" title="Demo 视频"]
 ```
 
-**區塊（帶說明文字）：**
+**区块（带说明文字）：**
 ```markdown
 [youtube id="dQw4w9WgXcQ"]
-這是一段示範影片的說明
+这是一段演示视频的说明
 [/youtube]
 ```
 
-- `id` 為 YouTube 影片 ID（網址中 `v=` 後面的值）
-- `title` 為選填的標題/說明，顯示在影片下方
-- 影片以 16:9 比例響應式嵌入
-- 列印模式下顯示 YouTube 連結取代 iframe
+- `id` 为 YouTube 视频 ID（网址中 `v=` 后面的值）
+- `title` 为选填标题/说明，显示在视频下方
+- 视频以 16:9 比例响应式嵌入
+- 打印模式下显示 YouTube 链接替代 iframe
 
-### Bonus 彈窗
+### Bonus 弹窗
 
-在任何章節（通常放在總結最下方）加入 `[bonus]` 區塊，build 後會產出一個按鈕，點擊開啟 Modal 彈窗，彈窗內容支援 Markdown。
+在任意章节（通常放在总结最下方）加入 `[bonus]` 区块，build 后会产出一个按钮，点击打开 Modal 弹窗，弹窗内容支持 Markdown。
 
 ```markdown
-[bonus title="🎁 幕後製作心得"]
-這裡是**彈窗內容**，支援基本 Markdown：
+[bonus title="🎁 幕后制作心得"]
+这里是**弹窗内容**，支持基本 Markdown：
 
-- 段落間用空行分隔
-- 清單用 `- item`
-- 粗體用 `**文字**`
-- 行內程式碼用 `` `code` ``
+- 段落间用空行分隔
+- 列表用 `- item`
+- 粗体用 `**文字**`
+- 行内代码用 `` `code` ``
 
-連續非空行會自動以 `<br>` 合併成同一段落。
+连续非空行会自动以 `<br>` 合并成同一段落。
 [/bonus]
 ```
 
-彈窗互動：
-- 點擊遮罩或右上角 ✕ 可關閉
-- 按 `Esc` 亦可關閉
+弹窗交互：
+- 点击遮罩或右上角 ✕ 可关闭
+- 按 `Esc` 也可关闭
