@@ -20,6 +20,36 @@ import { resolve, join } from 'path';
 import puppeteer from 'puppeteer';
 import { loadConfig } from './build.mjs';
 
+async function launchBrowser() {
+  const baseLaunchOptions = {
+    headless: 'new',
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  };
+
+  try {
+    return await puppeteer.launch(baseLaunchOptions);
+  } catch (primaryErr) {
+    const fallbackChannel = process.env.PUPPETEER_BROWSER_CHANNEL || 'chrome';
+    console.warn(`   ⚠️  Bundled Chromium unavailable, trying system browser channel: ${fallbackChannel}`);
+
+    try {
+      return await puppeteer.launch({ ...baseLaunchOptions, channel: fallbackChannel });
+    } catch (fallbackErr) {
+      fallbackErr.message = [
+        'Unable to launch a browser for OG image generation.',
+        'Options to fix:',
+        '  1) Install a system browser supported by Puppeteer (Chrome/Edge).',
+        '  2) Set PUPPETEER_BROWSER_CHANNEL (e.g. chrome or msedge).',
+        '  3) Run: npx puppeteer browsers install chrome',
+        '',
+        `Primary error: ${primaryErr.message}`,
+        `Fallback error: ${fallbackErr.message}`,
+      ].join('\n');
+      throw fallbackErr;
+    }
+  }
+}
+
 // ─── Escape HTML ───
 
 function esc(s) {
@@ -223,10 +253,7 @@ async function main() {
 
   const html = buildOgHtml(cfg);
 
-  const browser = await puppeteer.launch({
-    headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  });
+  const browser = await launchBrowser();
 
   try {
     const page = await browser.newPage();

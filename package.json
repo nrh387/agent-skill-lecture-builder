@@ -1,7 +1,7 @@
 {
   "name": "course",
   "version": "1.0.0",
-  "description": "Markdown 講稿 → 單一 HTML 課程頁面。零依賴 Node.js 建置。",
+  "description": "Markdown 讲稿 → 单一 HTML 课程页面。零依赖 Node.js 构建。",
   "main": "index.js",
   "scripts": {
     "build": "node .agents/skills/course-page-generator/scripts/build.mjs",
